@@ -1,0 +1,80 @@
+# --- Executables and Objects ---
+# Standard output names
+a.out
+*.o
+*.obj
+*.so
+*.a
+*.lib
+*.dll
+*.exe
+
+# Custom build directories (Standard convention)
+bin/
+build/
+dist/
+out/
+
+# The actual server binary (Change 'server' to your actual project name)
+server
+http_server
+
+# --- Dependency Management ---
+# If using a package manager like conan
+conan.lock
+conanfile.txt.user
+
+# --- Editors & IDEs ---
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Visual Studio (Windows)
+.vs/
+Debug/
+Release/
+*.user
+*.suo
+*.db
+*.opendb
+
+# Vim / Neovim
+[._]*.s[a-v][a-z]
+[._]sw[a-p]
+[._]s[a-v][a-z]
+*.un~
+Session.vim
+.netrwhist
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+.dir-locals.el
+
+# JetBrains (CLion)
+.idea/
+cmake-build-debug/
+cmake-build-release/
+
+# Xcode
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcworkspace/contents.xcworkspacedata
+
+# --- OS Specific ---
+.DS_Store
+Thumbs.db
+
+# --- Logs and Environment ---
+*.log
+.env
