@@ -1,0 +1,1 @@
+This project serves as a collection of http servers written in various languages as to learn said languages better as well as basic networking.
