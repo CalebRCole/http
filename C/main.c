@@ -15,6 +15,8 @@ int main() {
     fprintf(stderr, "Failed to create socket!\n");
     return EXIT_FAILURE;
   }
+  int opt = 1;
+  setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
 
   struct sockaddr_in6 sa = {.sin6_family = AF_INET6,
                             .sin6_port = htons(8080),
