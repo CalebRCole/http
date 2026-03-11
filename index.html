@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTP Server Test</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f2f5;
+        }
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Server Status: Online</h1>
+        <p>If you can see this, your HTTP server is successfully serving GET requests.</p>
+        <p>Current Time: <span id="time"></span></p>
+    </div>
+
+    <script>
+        // A little JS to show the page is interactive
+        document.getElementById('time').innerText = new Date().toLocaleTimeString();
+    </script>
+</body>
+</html>
