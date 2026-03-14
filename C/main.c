@@ -15,6 +15,11 @@ int main() {
     fprintf(stderr, "Failed to create socket!\n");
     return EXIT_FAILURE;
   }
+
+  /*
+    Allows port to be re-used upon closing immediately.
+    Standard behavior is to reserve the port to ensure packets are cleared
+   */
   int opt = 1;
   setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
 
