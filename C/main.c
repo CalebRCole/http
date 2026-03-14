@@ -4,8 +4,11 @@
 #include <string.h>
 
 #include <arpa/inet.h>
+#include <fcntl.h>
 #include <netinet/in.h>
+#include <sys/sendfile.h>
 #include <sys/socket.h>
+#include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
 
@@ -43,12 +46,12 @@ int main() {
     printf("Listening on port 8080...\n");
   }
 
-  const char *response = "HTTP/1.1 200 OK\r\n"
-                         "Content-Type: text/plain\r\n"
-                         "Content-Length: 13\r\n"
-                         "Connection: close\r\n"
-                         "\r\n"
-                         "Hello, World!";
+  char buffer[1024] = {0};
+  char method[10];
+  char path[100];
+  char headers[256];
+
+  struct stat st;
 
   while (true) {
     int connfd = accept(sockfd, (struct sockaddr *)&sa, (socklen_t *)&addrlen);
@@ -59,17 +62,42 @@ int main() {
       return EXIT_FAILURE;
     }
 
-    write(connfd, response, strlen(response));
+    read(connfd, buffer, sizeof(buffer) - 1);
+    sscanf(buffer, "%s %s", method, path);
+
+    char *file = (strcmp(path, "/") == 0) ? "index.html" : path + 1;
+    if (stat(file, &st) == -1) {
+      fprintf(stderr, "Failed to deliver file!\n");
+      close(connfd);
+      close(sockfd);
+    }
+
+    int filefd = open(file, O_RDONLY);
+
+    int header_len = snprintf(headers, sizeof(headers),
+                              "HTTP/1.1 200 OK\r\n"
+                              "Content-Type: text/html\r\n"
+                              "Content-Length: %d\r\n"
+                              "Connection: close\r\n"
+                              "\r\n",
+                              (int)st.st_size);
+
+    write(connfd, headers, header_len);
+
+    sendfile(connfd, filefd, NULL, st.st_size);
 
     if (shutdown(connfd, SHUT_RDWR) == -1) {
       fprintf(stderr, "Failed to shutdown connection!\n");
+      close(filefd);
       close(connfd);
       close(sockfd);
       return EXIT_FAILURE;
     }
 
+    close(filefd);
     close(connfd);
   }
 
+  close(sockfd);
   return EXIT_SUCCESS;
 }
