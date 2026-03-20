@@ -1,0 +1,7 @@
+* About
+
+This is a simple http server written in Go.
+
+** How to Use
+
+This program requires the Go compiler to compile.
