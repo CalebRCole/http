@@ -1,0 +1,10 @@
+* About
+This is a simple http server written in C++.
+
+** How to use
+
+This server requires a C++ compiler (G++, LLVM, MSVC+, etc.) to compile the source code into a binary file. Simply run the program on the command line and pass an argument for the root directory you want for the server. If you choose to compile in this directory, pass the argument, "..".
+
+** IMPORTANT!
+
+This server is not made to be very secure or efficient. Expect vulnerabilities and possible mistakes. This server is created as a learning experience to get more familiar with C++ and http servers!
