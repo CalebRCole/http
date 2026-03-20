@@ -1,1 +1,11 @@
+* About
+
 This is a http server written in C.
+
+** How to use
+
+Use requires a C compiler (GCC, LLVM, MSVC, etc.). Simply compile using "cc -o /your_desired_name/ main.c" and run it like any other command line program. One argument is supported, being whatever directory you wish to have as your server's root directory. If compiling to this subdirectory, pass ".." as the argument.
+
+** IMPORTANT!
+
+This server was made purely to learn more about POSIX sockets, http servers, and networking in a more detailed level. This server is NOT secure and safe to use as a real server, as it risks buffer overflows and directory traversal attacks. I plan to eventually fix these errors and make a more functional server in C, but as it is, it is unsafe to use this server beyond local machine testing.
